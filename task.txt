@@ -1,0 +1,10 @@
+переход в необходимую папку cd Papka/papka1/
+Инициализация Git -> git init
+Подключение к необходимому репозиторию ->git remote add origin
+Клонирование проекта -> git clone
+фиксация исходной версии -> git status-> git add. ->git commit -m "Start"
+внесение изменений
+создание коммита после выполнения задачи 1 -> git status-> git add. ->git commit -m "task1"
+создание коммита после выполнения задачи 2 -> git status-> git add. ->git commit -m "task2"
+создание коммита после выполнения задачи n -> git status-> git add. ->git commit -m "taskn"
+возврат на github в ветку разработки ->git push origin dev

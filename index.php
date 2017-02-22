@@ -1,56 +1,52 @@
 <?php
-function change_color (&$color){
-
-	$edcol=array_pop($color);
-	array_unshift($color, $edcol);
-	return $color[0];
-
+function test ($n,$m){
+	$mes='Ваш ответ:</br>';
+	if (empty($n)||empty($m)){
+		$mes.='Одно из чисел пустое</br>';
+	}
+	elseif ($m<=0||$n<=0){
+		$mes.='Укажите положительное число</br>';
+	}
+	elseif ($m==$n){
+		$mes.='Число не могут совпадать</br>';
+	}
+	elseif (abs($m-$n)<3){
+		$mes.='разница между числами должна быть не менее 3-х</br>';
+	}
+	elseif ($n>$m){
+		$mes.='Первое число должно быть меньше второго</br>';
+	}
+	elseif (($m-$n)%2!=0){
+		$mes.='Нет возможности расчитать медиану</br>';
+	}
+	else {
+		$mediana=($m+$n)/2;
+		$mes.='mediana = '.$mediana.'</br> Prime numbers = '.++$n.' и '.--$m.'</br>';
+	}
+	return $mes;
 }
-function chess_board ($h,$l,$colors){
-	$w=99/$l.'%';
-	$hi=99/$h.'%'; ?>
-	<div style="width: auto; border: solid 1px black;">
-	<?php
-	for ($i=1;$i<=$h;$i++) : ?>
-		<div style="height: <?php echo $hi?>; width: auto">
-			<?php for ($z=1;$z<=$l;$z++):   ?>
-				<div style="float: left; height:100%; width: <?php echo $w?>; background-color: <?php echo change_color($colors)?>"></div>
-				<?php
-			endfor; ?>
-		</div>
-		<?php
-	endfor;
-	?>
-	</div>
-	<?php
-}
 
-if ($_POST){
-	$h=$_POST['H'];
-	$l=$_POST['L'];
-	$c=$_POST['C'];
-	$colors=array('black','white',''.$c.'');
-	echo chess_board($h,$l,$colors);
+if (!empty($_POST))
+{
+	$mes = test ($_POST['n'],$_POST['m']);
 }
 
 ?>
-<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Chess board</title>
+
 </head>
 <body>
-<div style="clear: both;"></div>
-<div style="width: auto">
+<div>
 	<form method="post">
-		<label for="Hi">Высота</label>
-		<input type="number" name="H" id="Hi"><Br>
-		<label for="Lo">Ширина</label>
-		<input type="number" name="L" id="Lo"><Br>
-		<label for="color">Цвет</label>
-		<input type="text" name="C" id="color"><Br>
-		<input type="submit">
+		<label>Первое число</label>
+		<input type="number" name="n"></br></br>
+		<label>Второе число</label>
+		<input type="number" name="m"></br></br>
+		<input type="submit" value="GO">
 	</form>
 </div>
+<div>
+	<?=$mes?>
+</div>
 </body>
-</html>
