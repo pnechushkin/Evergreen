@@ -1,52 +1,40 @@
 <?php
-function test ($n,$m){
-	$mes='Ваш ответ:</br>';
-	if (empty($n)||empty($m)){
-		$mes.='Одно из чисел пустое</br>';
-	}
-	elseif ($m<=0||$n<=0){
-		$mes.='Укажите положительное число</br>';
-	}
-	elseif ($m==$n){
-		$mes.='Число не могут совпадать</br>';
-	}
-	elseif (abs($m-$n)<3){
-		$mes.='разница между числами должна быть не менее 3-х</br>';
-	}
-	elseif ($n>$m){
-		$mes.='Первое число должно быть меньше второго</br>';
-	}
-	elseif (($m-$n)%2!=0){
-		$mes.='Нет возможности расчитать медиану</br>';
-	}
-	else {
-		$mediana=($m+$n)/2;
-		$mes.='mediana = '.$mediana.'</br> Prime numbers = '.++$n.' и '.--$m.'</br>';
-	}
-	return $mes;
-}
 
-if (!empty($_POST))
+/**
+ * Class Animal
+ */
+class Animal
 {
-	$mes = test ($_POST['n'],$_POST['m']);
+    protected $name;
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    function __construct($name) {
+        $this->name=$name;
+    }
+}
+/**
+ * Class Cat
+ */
+class Cat extends Animal
+{
+    protected $catname;
+    public function meow ()
+    {
+        return "Cat {$this->catname} is sayig meow";
+    }
+    function __construct($catname) {
+        parent::__construct($catname);
+        $this->catname=$catname;
+    }
 }
 
-?>
-<html lang="en">
-<head>
 
-</head>
-<body>
-<div>
-	<form method="post">
-		<label>Первое число</label>
-		<input type="number" name="n"></br></br>
-		<label>Второе число</label>
-		<input type="number" name="m"></br></br>
-		<input type="submit" value="GO">
-	</form>
-</div>
-<div>
-	<?=$mes?>
-</div>
-</body>
+$cat = new Cat('garfild');
+echo $cat->getName ();
+echo $cat->meow ();
